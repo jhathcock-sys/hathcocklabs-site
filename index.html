@@ -1256,35 +1256,42 @@
         <h2>Let's talk about what<br />AI can do for your business</h2>
         <p>Free consultation. No pressure. Just an honest conversation about where technology can help you.</p>
         <p style="margin-top:-1rem; font-size:0.9rem;">Or email directly: <a href="mailto:james@hathcocklabs.io" style="color:var(--cyan);text-decoration:none;">james@hathcocklabs.io</a></p>
-        <form class="contact-form" onsubmit="return false;">
+        <form class="contact-form" action="https://formsubmit.co/james@hathcocklabs.io" method="POST">
+          <!-- Formsubmit config -->
+          <input type="hidden" name="_subject" value="New inquiry — Hathcock Labs" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_next" value="https://hathcocklabs.io?sent=1" />
           <div class="form-row">
             <div class="form-group">
               <label for="name">Your Name</label>
-              <input type="text" id="name" placeholder="John Smith" />
+              <input type="text" id="name" name="name" placeholder="John Smith" required />
             </div>
             <div class="form-group">
               <label for="email">Email Address</label>
-              <input type="email" id="email" placeholder="john@company.com" />
+              <input type="email" id="email" name="email" placeholder="john@company.com" required />
             </div>
           </div>
           <div class="form-group">
             <label for="business">Business Name</label>
-            <input type="text" id="business" placeholder="Smith & Co." />
+            <input type="text" id="business" name="business" placeholder="Smith & Co." />
           </div>
           <div class="form-group">
             <label for="interest">I'm interested in...</label>
-            <select id="interest">
+            <select id="interest" name="service">
               <option value="">Select a service</option>
               <option>AI Workflow Automation</option>
               <option>Local AI Deployment</option>
-              <option>IT Infrastructure</option>
+              <option>Cloud &amp; Infrastructure</option>
               <option>Managed Services</option>
+              <option>Disaster Recovery &amp; BCP</option>
+              <option>HIPAA / PCI Compliance</option>
               <option>Not sure yet — let's talk</option>
             </select>
           </div>
           <div class="form-group">
             <label for="message">Tell us about your situation</label>
-            <textarea id="message" placeholder="What challenges are you running into? What does your current tech setup look like?"></textarea>
+            <textarea id="message" name="message" placeholder="What challenges are you running into? What does your current tech setup look like?"></textarea>
           </div>
           <div class="form-submit">
             <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
@@ -1293,6 +1300,20 @@
             </button>
           </div>
         </form>
+
+        <!-- Thank you message (shown after redirect back with ?sent=1) -->
+        <div id="thank-you" style="display:none; margin-top:2rem; background:var(--cyan-glow); border:1px solid var(--cyan-dim); border-radius:var(--radius); padding:1.5rem; text-align:center;">
+          <i data-lucide="check-circle" style="width:32px;height:32px;color:var(--cyan);margin-bottom:0.75rem;"></i>
+          <h3 style="font-family:var(--font-head); font-size:1.1rem; margin-bottom:0.4rem;">Message received!</h3>
+          <p style="color:var(--fg-muted); font-size:0.9rem;">James will be in touch within one business day.</p>
+        </div>
+
+        <script>
+          if (window.location.search.includes('sent=1')) {
+            document.querySelector('.contact-form').style.display = 'none';
+            document.getElementById('thank-you').style.display = 'block';
+          }
+        </script>
       </div>
     </div>
   </section>
